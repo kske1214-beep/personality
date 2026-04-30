@@ -9,7 +9,7 @@
 <body>
   <header class="hero">
     <h1>面接向け 企業分析ダッシュボード</h1>
-    <p>企業名・中途採用・勤務地・職種から、面接準備に必要な情報を可視化します。</p>
+    <p>企業名・中途採用・勤務地・職種・求人票から、面接準備に必要な情報を可視化します。</p>
   </header>
 
   <main class="container">
@@ -35,14 +35,22 @@
           <option value="">選択してください</option>
         </select>
 
-        <button type="submit">分析を表示</button>
+        <label for="jobPostText">5. 求人票（コピペ）</label>
+        <textarea
+          id="jobPostText"
+          rows="8"
+          placeholder="求人票本文をそのまま貼り付けてください（必須）"
+          required
+        ></textarea>
+
+        <button type="submit">分析を表示（自動）</button>
       </form>
     </section>
 
     <section class="panel results" aria-live="polite">
       <h2>分析結果</h2>
       <div id="emptyState" class="empty-state">
-        条件を入力して「分析を表示」をクリックしてください。
+        1〜5を入力して「分析を表示（自動）」をクリックしてください。
       </div>
 
       <article id="resultCard" class="hidden">
@@ -51,17 +59,22 @@
 
         <div class="viz-grid">
           <section class="viz-card">
-            <h4>企業の強みマップ</h4>
+            <h4>企業の強みマップ（求人票補正後）</h4>
             <canvas id="strengthChart" width="440" height="260"></canvas>
             <p id="strengthDescription"></p>
           </section>
 
           <section class="viz-card">
-            <h4>募集ポジションの重視項目</h4>
+            <h4>募集ポジションの重視項目（求人票補正後）</h4>
             <canvas id="fitChart" width="440" height="260"></canvas>
             <p id="fitDescription"></p>
           </section>
         </div>
+
+        <section class="insight">
+          <h4>求人票のキーワード抽出</h4>
+          <ul id="keywordList"></ul>
+        </section>
 
         <section class="insight">
           <h4>求める人材の特定（面接対策）</h4>
@@ -77,7 +90,7 @@
   </main>
 
   <footer>
-    <small>※ デモデータです。実運用時は求人票・IR情報・口コミ分析などの最新データ連携を推奨します。</small>
+    <small>※ デモ版: 入力した求人票本文のキーワード頻度から分析結果を自動補正します。</small>
   </footer>
 
   <script src="app.js"></script>
