@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>面接準備OS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>面接準備OS</h1>
+    <p>求人票を「評価軸」に翻訳し、面接で勝つための回答・逆質問・比較材料を一気通貫で生成。</p>
+    <div class="winrate" id="winRateCard">
+      <span>面接通過率予測</span>
+      <strong id="winRateScore">--</strong>
+      <small id="winRateReason">入力後に算出されます</small>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel input-panel">
+      <h2>入力</h2>
+      <form id="searchForm">
+        <label>1. 企業名<input id="companyInput" type="text" required /></label>
+        <label>2. 採用種別
+          <select id="hiringType" required>
+            <option value="">選択してください</option>
+            <option>中途採用（正社員）</option><option>中途採用（契約社員）</option>
+          </select>
+        </label>
+        <label>3. 勤務地<select id="location" required></select></label>
+        <label>4. 職種<select id="jobType" required></select></label>
+        <label>5. 求人票（コピペ）<textarea id="jobPostText" rows="10" required></textarea></label>
+        <button type="submit">面接準備OSを実行</button>
+      </form>
+    </section>
+
+    <section class="panel output-panel" id="resultPanel">
+      <h2 id="resultTitle">分析結果</h2>
+      <p id="resultSummary">1〜5を入力して実行してください。</p>
+
+      <div class="grid two">
+        <article class="card">
+          <h3>① 求人票の構造化（MUST / WANT / 隠れ評価軸）</h3>
+          <div class="triad">
+            <div><h4>MUST条件</h4><ul id="mustList"></ul></div>
+            <div><h4>WANT条件</h4><ul id="wantList"></ul></div>
+            <div><h4>隠れ評価軸</h4><ul id="hiddenList"></ul></div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>② 面接評価軸スコア</h3>
+          <canvas id="axisChart" width="580" height="320"></canvas>
+          <p id="axisReason"></p>
+        </article>
+      </div>
+
+      <div class="grid two">
+        <article class="card">
+          <h3>③ 逆質問（相手別）</h3>
+          <h4>人事向け</h4><ul id="hrQuestions"></ul>
+          <h4>現場責任者向け</h4><ul id="mgrQuestions"></ul>
+          <h4>代表向け</h4><ul id="ceoQuestions"></ul>
+        </article>
+        <article class="card">
+          <h3>④ 回答生成（面接でそのまま使う）</h3>
+          <h4>志望動機</h4><p id="motivation"></p>
+          <h4>自己PR</h4><p id="selfPr"></p>
+          <h4>転職理由</h4><p id="reasonChange"></p>
+          <h4>想定質問</h4><ul id="expectedQs"></ul>
+          <h4>深掘り質問</h4><ul id="deepQs"></ul>
+        </article>
+      </div>
+
+      <article class="card">
+        <h3>⑥ 競合比較（面接で語れる差分）</h3>
+        <table>
+          <thead><tr><th>項目</th><th>応募企業</th><th>競合A</th><th>競合B</th><th>示唆</th></tr></thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
